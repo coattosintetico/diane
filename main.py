@@ -25,13 +25,12 @@ def stop():
 def transcribe():
     client = OpenAI(api_key=OPENAI_API_KEY)
     with open(FILENAME, "rb") as audio:
-        transcript = client.audio.transcriptions.create(
+        return client.audio.transcriptions.create(
             model="whisper-1",
             file=audio,
             response_format="text",
             prompt="Hola! ¿Qué tal?",
         )
-    return transcript.text
 
 def cleanup():
     os.remove(FILENAME)
