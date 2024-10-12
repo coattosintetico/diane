@@ -42,7 +42,7 @@ if __name__ == "__main__":
     record()
     input("\n\t(👉👂 listening...)")
     stop()
-    print("\t🤔 mhh...")
+    print("\t(🤔 mhh...)")
     transcript = transcribe()
     print("\nthx Cooper, noted:\n")
     print(f"\t{transcript}\n")
