@@ -1,13 +1,17 @@
 import datetime
 import os
-from openai import OpenAI
 import subprocess
 from pathlib import Path
+
+from openai import OpenAI
 
 REPOSITORY_PATH = Path("/data/data/com.termux/files/home/diane")
 DATA_FOLDER_PATH = REPOSITORY_PATH / "data"
 
 FILENAME = DATA_FOLDER_PATH / f"{datetime.datetime.now().strftime(r'%Y%m%d%H%M%S')}.m4a"
+
+with open(Path("/data/data/com.termux/files/home/.secrets/openai_api_key.txt"), "r") as file:
+    OPENAI_API_KEY = file.read().strip()
 
 
 def record():
@@ -20,7 +24,7 @@ def stop():
 
 
 def transcribe():
-    client = OpenAI()
+    client = OpenAI(api_key=OPENAI_API_KEY)
     with open(FILENAME, "rb") as audio:
         transcript = client.audio.transcriptions.create(
             model="whisper-1",
@@ -40,4 +44,3 @@ if __name__ == "__main__":
     stop()
     print("\nthx Cooper, noted:\n")
     print(f"\t{transcript}\n")
-
