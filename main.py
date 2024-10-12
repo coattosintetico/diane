@@ -1,8 +1,7 @@
 import os
 import subprocess
 from pathlib import Path
-from time import sleep
-
+import time
 from openai import OpenAI
 
 REPOSITORY_PATH = Path("/data/data/com.termux/files/home/diane")
@@ -20,6 +19,8 @@ def record():
 
 def stop():
     subprocess.run(["termux-microphone-record", "-q"], check=True, stdout=subprocess.DEVNULL)
+    # Give some time to the file to be created
+    time.sleep(1)
 
 
 def transcribe():
@@ -29,7 +30,7 @@ def transcribe():
             model="whisper-1",
             file=audio,
             response_format="text",
-            prompt="Hola! ¿Qué tal?",
+            prompt="hola, hablo en español",
         )
 
 def cleanup():
@@ -42,9 +43,6 @@ if __name__ == "__main__":
     input("\n\t(👉👂 listening...)")
     stop()
     print("\t🤔 mhh...")
-    # something is failing, so print here all the files in /data
-    sleep(3)
-    print(os.listdir(DATA_FOLDER_PATH))
     transcript = transcribe()
     print("\nthx Cooper, noted:\n")
     print(f"\t{transcript}\n")
