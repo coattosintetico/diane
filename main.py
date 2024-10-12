@@ -42,6 +42,8 @@ if __name__ == "__main__":
     record()
     input("\n\t(👉👂 listening...)")
     print("\t🤔 mhh...")
+    # something is failing, so print here all the files in /data
+    print(os.listdir(DATA_FOLDER_PATH))
     transcript = transcribe()
     stop()
     print("\nthx Cooper, noted:\n")
