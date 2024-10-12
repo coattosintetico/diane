@@ -1,6 +1,7 @@
 import os
 import subprocess
 from pathlib import Path
+from time import sleep
 
 from openai import OpenAI
 
@@ -43,6 +44,7 @@ if __name__ == "__main__":
     stop()
     print("\t🤔 mhh...")
     # something is failing, so print here all the files in /data
+    sleep(3)
     print(os.listdir(DATA_FOLDER_PATH))
     transcript = transcribe()
     print("\nthx Cooper, noted:\n")
