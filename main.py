@@ -20,7 +20,6 @@ def record():
 
 def stop():
     subprocess.run(["termux-microphone-record", "-q"], check=True, stdout=subprocess.DEVNULL)
-    os.remove(FILENAME)  # Remove the file after stopping the recording
 
 
 def transcribe():
@@ -34,6 +33,9 @@ def transcribe():
         )
     return transcript.text
 
+def cleanup():
+    os.remove(FILENAME)
+
 
 if __name__ == "__main__":
     print("\nHEY... I'M DIANE\n")
@@ -44,3 +46,4 @@ if __name__ == "__main__":
     stop()
     print("\nthx Cooper, noted:\n")
     print(f"\t{transcript}\n")
+    cleanup()
