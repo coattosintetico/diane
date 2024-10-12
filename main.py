@@ -8,7 +8,8 @@ from openai import OpenAI
 REPOSITORY_PATH = Path("/data/data/com.termux/files/home/diane")
 DATA_FOLDER_PATH = REPOSITORY_PATH / "data"
 
-FILENAME = DATA_FOLDER_PATH / f"{datetime.datetime.now().strftime(r'%Y%m%d%H%M%S')}.m4a"
+now = datetime.datetime.now().strftime(r'%Y%m%d%H%M%S')
+FILENAME = DATA_FOLDER_PATH / f"{now}.m4a"
 
 with open(Path("/data/data/com.termux/files/home/.secrets/openai_api_key.txt"), "r") as file:
     OPENAI_API_KEY = file.read().strip()
