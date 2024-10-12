@@ -1,5 +1,6 @@
 import datetime
 import os
+from openai import OpenAI
 import subprocess
 from pathlib import Path
 
@@ -18,9 +19,25 @@ def stop():
     os.remove(FILENAME)  # Remove the file after stopping the recording
 
 
+def transcribe():
+    client = OpenAI()
+    with open(FILENAME, "rb") as audio:
+        transcript = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=audio,
+            response_format="text",
+            prompt="Hola! ¿Qué tal?",
+        )
+    return transcript.text
+
+
 if __name__ == "__main__":
     print("\nHEY... I'M DIANE\n")
     record()
-    input("\n\t(👉👂 listening...)\n")
+    input("\n\t(👉👂 listening...)")
+    print("\t🤔 mhh...")
+    transcript = transcribe()
     stop()
-    print("\nthx Cooper, noted\n")
+    print("\nthx Cooper, noted:\n")
+    print(f"\t{transcript}\n")
+
