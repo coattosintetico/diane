@@ -40,11 +40,11 @@ if __name__ == "__main__":
     print("\nHEY... I'M DIANE\n")
     record()
     input("\n\t(👉👂 listening...)")
+    stop()
     print("\t🤔 mhh...")
     # something is failing, so print here all the files in /data
     print(os.listdir(DATA_FOLDER_PATH))
     transcript = transcribe()
-    stop()
     print("\nthx Cooper, noted:\n")
     print(f"\t{transcript}\n")
     cleanup()
