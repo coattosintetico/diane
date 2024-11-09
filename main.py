@@ -21,6 +21,7 @@ def greetings():
     print()
     print()
 
+
 def record():
     subprocess.run(["termux-microphone-record", "-f", FILENAME], check=True, stdout=subprocess.DEVNULL)
 

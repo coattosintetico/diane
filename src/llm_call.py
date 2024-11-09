@@ -37,5 +37,5 @@ def extract_expense(transcript: str) -> Expense:
     # Format datapoints as I please
     expense.description = expense.description.lower()
     expense.amount = expense.amount.replace(",", ".")
-    
+
     return expense
