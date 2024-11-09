@@ -28,7 +28,7 @@ def report():
     # Write the data in the format required by termgraph
     with open(temp_file, "w") as f:
         for _, row in category_sums.iterrows():
-            f.write(f"{row['category']} {row['amount']}\n")
+            f.write(f"{row['category']},{row['amount']}\n")
 
     try:
         print("executing termgraph command...")
