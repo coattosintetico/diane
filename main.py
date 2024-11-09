@@ -14,6 +14,13 @@ FILENAME = REPOSITORY_PATH / "audiorecording.m4a"  # this is how Termux saves th
 OPENAI_CLIENT = OpenAI()
 
 
+def greetings():
+    print()
+    print()
+    print("HEY COOPER... I'M DIANE")
+    print()
+    print()
+
 def record():
     subprocess.run(["termux-microphone-record", "-f", FILENAME], check=True, stdout=subprocess.DEVNULL)
 
@@ -37,11 +44,6 @@ def transcribe():
 
 
 def main():
-    print()
-    print()
-    print("HEY COOPER... I'M DIANE")
-    print()
-    print()
     record()
     input("\t(👉👂 listening...)")
     stop()
@@ -69,8 +71,10 @@ def main():
         return
     else:
         print("ooops sorry, try saying it again:")
+        print()
         main()
 
 
 if __name__ == "__main__":
+    greetings()
     main()
