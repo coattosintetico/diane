@@ -40,3 +40,7 @@ def report():
         print("cleaning up...")
         # Clean up the temporary file
         temp_file.unlink()
+
+
+if __name__ == "__main__":
+    report()
