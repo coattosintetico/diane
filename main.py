@@ -78,7 +78,8 @@ def main():
         print(f"│ category:    {expense.category.value}")
         print("└───")
         print()
-        confirmation = input("is that right or correct description? (Y/[d]escription/[r]etry)")
+        print("is that right or correct description?")
+        confirmation = input("\t(Y/[d]escription/[r]etry)")
         if confirmation.lower() == "r":
             print("sorry, retrying...")
             print()
