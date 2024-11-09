@@ -21,7 +21,7 @@ def record():
 def stop():
     subprocess.run(["termux-microphone-record", "-q"], check=True, stdout=subprocess.DEVNULL)
     # Give some time to the file to be created, otherwise there's a weird race condition
-    time.sleep(1)
+    time.sleep(0.5)
 
 
 def transcribe():
@@ -39,7 +39,7 @@ def transcribe():
 def main():
     print()
     print()
-    print("HEY... I'M DIANE")
+    print("HEY COOPER... I'M DIANE")
     print()
     print()
     record()
@@ -68,11 +68,9 @@ def main():
         print()
         return
     else:
-        print("ooops sorry")
+        print("ooops sorry, try saying it again:")
+        main()
 
 
 if __name__ == "__main__":
     main()
-    # expense = extract_expense("cervezas en el pepe, 7.20, alcoholesto")
-    # expense = extract_expense("compra mercadona helados, 12.50, sobrevivir es caro")
-    # print(expense)
