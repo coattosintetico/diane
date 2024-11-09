@@ -16,7 +16,9 @@ def report():
     Sum of amount expensed per category for current month.
     """
     print()
-    print("\033[3mM O N T H L Y   R E P O R T\033[0m")
+    print("╔═════════════════════════════╗")
+    print("║ \033[3mM O N T H L Y   R E P O R T\033[0m\t\t ║")
+    print("╚═════════════════════════════╝")
     print()
 
     df = pd.read_csv(EXPENSES_FILE)
