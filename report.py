@@ -20,6 +20,8 @@ def report():
     print("computing data...")
     # Group by category and sum the amounts
     category_sums = df.groupby("category")["amount"].sum().reset_index()
+    # exclude "hacendado"
+    category_sums = category_sums[category_sums["category"] != "hacendado"]
 
     print("writing data to file...")
     # Create a temporary .dat file for termgraph
