@@ -17,7 +17,7 @@ def report():
     """
     print()
     print("╔═════════════════════════════╗")
-    print("║ \033[3mM O N T H L Y   R E P O R T\033[0m\t\t ║")
+    print("║ \033[3mM O N T H L Y   R E P O R T\033[0m ║")
     print("╚═════════════════════════════╝")
     print()
 
