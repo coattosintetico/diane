@@ -5,7 +5,7 @@ from .llm_call import Expense
 
 # get the current year and month in the format YYYY-MM
 EXPENSES_FILE = Path(
-    f"/data/data/com.termux/files/home/storage/shared/Documents/obsidianRemoteVault/personal/expenses/{datetime.now().strftime('%Y-%m')}.csv"
+    f"/data/data/com.termux/files/home/storage/shared/Documents/obsidianRemoteVault/personal/expenses/{datetime.now().strftime('%Y-%m')}.csv.md"
 )
 
 

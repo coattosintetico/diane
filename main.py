@@ -65,6 +65,7 @@ def main():
         print("\t(📝 saving...)")
         add_expense(expense)
         print("\t(✅ done)")
+        print()
         return
     else:
         print("ooops sorry")
