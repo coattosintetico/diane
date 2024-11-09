@@ -19,7 +19,7 @@ class ExpenseCategory(Enum):
 
 class Expense(BaseModel):
     description: str
-    amount: str
+    amount: float
     category: ExpenseCategory
 
 
@@ -36,6 +36,6 @@ def extract_expense(transcript: str) -> Expense:
     expense = completion.choices[0].message.parsed
     # Format datapoints as I please
     expense.description = expense.description.lower()
-    expense.amount = expense.amount.replace(",", ".")
+    expense.description = expense.description.replace(",", "")
 
     return expense
