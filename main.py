@@ -25,16 +25,14 @@ def stop():
 
 def transcribe():
     with open(FILENAME, "rb") as audio:
-        return OPENAI_CLIENT.audio.transcriptions.create(
+        transcript = OPENAI_CLIENT.audio.transcriptions.create(
             model="whisper-1",
             file=audio,
             response_format="text",
             prompt="hola, son 3.50 euros",
         )
-
-
-def remove_recording():
     os.remove(FILENAME)
+    return transcript
 
 
 def main():
@@ -48,17 +46,18 @@ def main():
     stop()
     print("\t(🤔 mhh...)")
     transcript = transcribe()
-    print("transcript received:")
-    print(f"\t{transcript}")
-    remove_recording()
-    print("extracting expense...")
+    print(f"\t(🗣️ \"{transcript}\")")
+    print("\t(🛠️...)")
     expense = extract_expense(transcript)
+    print()
     print("\033[3mwell, I think I understood the following:\033[0m")
+    print()
     print("┌───")
-    print(f"│ description: {expense.description}")
+    print(f"│ description: {expense.description.lower()}")
     print(f"│ amount:      {expense.amount}")
-    print(f"│ category:    {expense.category}")
+    print(f"│ category:    {expense.category.value}")
     print("└───")
+    print()
     confirmation = input("is that right? (Y/n)")
     if confirmation.lower() == "n":
         print("ooops sorry")
