@@ -35,6 +35,7 @@ def extract_expense(transcript: str) -> Expense:
     )
     expense = completion.choices[0].message.parsed
     # Format datapoints as I please
+    expense.description = expense.description.strip()
     expense.description = expense.description.lower()
     expense.description = expense.description.replace(",", "")
 

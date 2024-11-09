@@ -42,7 +42,7 @@ def transcribe():
             prompt="hola, son 3.50 euros",
         )
     os.remove(FILENAME)
-    return transcript
+    return transcript.strip()
 
 
 def get_input_with_default(prompt: str, default: str) -> str:
@@ -79,7 +79,7 @@ def main():
         print("└───")
         print()
         print("is that right or correct description?")
-        confirmation = input("\t(Y/[d]escription/[r]etry)")
+        confirmation = input("(Y/[d]escription/[r]etry)")
         if confirmation.lower() == "r":
             print("sorry, retrying...")
             print()
