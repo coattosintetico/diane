@@ -1,7 +1,8 @@
 import os
 import subprocess
-from pathlib import Path
 import time
+from pathlib import Path
+
 from openai import OpenAI
 
 REPOSITORY_PATH = Path("/data/data/com.termux/files/home/diane")
@@ -11,6 +12,8 @@ FILENAME = DATA_FOLDER_PATH / f"audiorecording.m4a"
 
 with open(Path("/data/data/com.termux/files/home/.secrets/openai_api_key.txt"), "r") as file:
     OPENAI_API_KEY = file.read().strip()
+
+OPENAI_CLIENT = OpenAI()
 
 
 def record():
@@ -24,26 +27,31 @@ def stop():
 
 
 def transcribe():
-    client = OpenAI(api_key=OPENAI_API_KEY)
     with open(FILENAME, "rb") as audio:
-        return client.audio.transcriptions.create(
+        return OPENAI_CLIENT.audio.transcriptions.create(
             model="whisper-1",
             file=audio,
             response_format="text",
-            prompt="hola, hablo en español",
+            prompt="hola, son 3.50 euros",
         )
+
 
 def cleanup():
     os.remove(FILENAME)
 
 
 if __name__ == "__main__":
-    print("\nHEY... I'M DIANE\n")
+    print()
+    print("HEY... I'M DIANE")
+    print()
+    print()
     record()
-    input("\n\t(👉👂 listening...)")
+    input("\t(👉👂 listening...)")
     stop()
     print("\t(🤔 mhh...)")
     transcript = transcribe()
-    print("\nthx Cooper, noted:\n")
-    print(f"\t{transcript}\n")
+    print()
+    print("thx Cooper, noted:")
+    print()
+    print(f"\t{transcript}")
     cleanup()
