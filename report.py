@@ -37,7 +37,7 @@ def report():
         # Execute termgraph command
         import subprocess
 
-        subprocess.run(["termgraph", str(temp_file)], check=True)
+        subprocess.run(["termgraph", "--width", "30", str(temp_file)], check=True)
     finally:
         print("cleaning up...")
         # Clean up the temporary file
