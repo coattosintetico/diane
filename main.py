@@ -75,33 +75,24 @@ def main():
     print(f"│ category:    {expense.category.value}")
     print("└───")
     print()
-    confirmation = input("is that right? (Y/n)")
-    if confirmation.lower() != "n":
+    confirmation = input("is that right or correct description? (Y/n/c)")
+    if confirmation.lower() == "c":
+        print("sorry, retrying...")
         print()
-        print("\t(📝 saving...)")
-        add_expense(expense)
-        print("\t(✅ done)")
-        print()
-        return
-    else:
+        main()
+    elif confirmation.lower() == "n":
         corrected_description = get_input_with_default(
-            "ooops sorry, try correcting the description:", expense.description
+            "ooops sorry, try correcting the description:\n\n> ", expense.description
         )
         expense.description = corrected_description
-        print()
-        print(expense)
-        # main()
+    print()
+    print("\t(📝 saving...)")
+    add_expense(expense)
+    print("\t(✅ done)")
+    print()
+    return
 
 
 if __name__ == "__main__":
     greetings()
     main()
-
-
-import readline
-
-if __name__ == "__main__":
-    prompt = "Enter your input: "
-    default_text = "Default text here"
-    user_input = get_input_with_default(prompt, default_text)
-    print(f"You entered: {user_input}")
