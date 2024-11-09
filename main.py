@@ -5,6 +5,8 @@ from pathlib import Path
 
 from openai import OpenAI
 
+from src.llm_call import extract_expense
+
 REPOSITORY_PATH = Path("/data/data/com.termux/files/home/diane")
 FILENAME = REPOSITORY_PATH / "audiorecording.m4a"  # this is how Termux saves the audio file by default
 
@@ -31,11 +33,12 @@ def transcribe():
         )
 
 
-def cleanup():
+def remove_recording():
     os.remove(FILENAME)
 
 
-if __name__ == "__main__":
+def main():
+    print()
     print()
     print("HEY... I'M DIANE")
     print()
@@ -45,8 +48,24 @@ if __name__ == "__main__":
     stop()
     print("\t(🤔 mhh...)")
     transcript = transcribe()
+    remove_recording()
+    expense = extract_expense(transcript)
     print()
-    print("thx Cooper, noted:")
-    print()
-    print(f"\t{transcript}")
-    cleanup()
+    print("\033[3mwell, I think I understood the following:\033[0m")
+    print("┌───")
+    print(f"│ description: {expense.description}")
+    print(f"│ amount:      {expense.amount}")
+    print(f"│ category:    {expense.category}")
+    print("└───")
+    confirmation = input("is that right? (Y/n)")
+    if confirmation.lower() == "n":
+        print("ooops sorry")
+    else:
+        print("nice then")
+
+
+if __name__ == "__main__":
+    main()
+    # expense = extract_expense("cervezas en el pepe, 7.20, alcoholesto")
+    # expense = extract_expense("compra mercadona helados, 12.50, sobrevivir es caro")
+    # print(expense)
