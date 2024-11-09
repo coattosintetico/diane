@@ -14,7 +14,7 @@ def add_expense(expense: Expense) -> None:
     Adds an expense to the .csv file of the current month.
     Handles trailing whitespace and newlines to ensure consistent formatting.
     """
-    expense_line = f"{expense.description.lower()},{expense.amount},{datetime.now().day},{expense.category.value}\n"
+    expense_line = f"{expense.description},{expense.amount},{datetime.now().day},{expense.category.value}\n"
 
     # Raise error if the file doesn't exist
     if not EXPENSES_FILE.exists():

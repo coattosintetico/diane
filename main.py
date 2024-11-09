@@ -54,7 +54,7 @@ def main():
     print("\033[3mwell, I think I understood the following:\033[0m")
     print()
     print("┌───")
-    print(f"│ description: {expense.description.lower()}")
+    print(f"│ description: {expense.description}")
     print(f"│ amount:      {expense.amount}")
     print(f"│ category:    {expense.category.value}")
     print("└───")
