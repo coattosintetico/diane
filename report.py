@@ -22,6 +22,8 @@ def report():
     category_sums = df.groupby("category")["amount"].sum().reset_index()
     # exclude "hacendado"
     category_sums = category_sums[category_sums["category"] != "hacendado"]
+    # compute total amount
+    total = category_sums["amount"].sum()
 
     print("writing data to file...")
     # Create a temporary .dat file for termgraph
@@ -38,6 +40,10 @@ def report():
         import subprocess
 
         subprocess.run(["termgraph", "--width", "25", str(temp_file)], check=True)
+
+        print("┌───")
+        print(f"│ Total for this month: {total:.2f} €")
+        print("└───")
     finally:
         print("cleaning up...")
         # Clean up the temporary file
