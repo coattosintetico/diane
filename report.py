@@ -41,6 +41,7 @@ def report():
 
         subprocess.run(["termgraph", "--width", "25", str(temp_file)], check=True)
 
+        print()
         print("┌───")
         print(f"│ Total for this month: {total:.2f} €")
         print("└───")
