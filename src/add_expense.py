@@ -12,10 +12,22 @@ EXPENSES_FILE = Path(
 def add_expense(expense: Expense) -> None:
     """
     Adds an expense to the .csv file of the current month.
+    Handles trailing whitespace and newlines to ensure consistent formatting.
     """
-    current_date = datetime.now().strftime("%d")
+    expense_line = f"{expense.description},{expense.amount},{datetime.now().day},{expense.category.value}\n"
 
-    with open(EXPENSES_FILE, "a") as file:
-        file.write(f"{expense.description},{expense.amount},{current_date},{expense.category.value}\n")
+    # Raise error if the file doesn't exist
+    if not EXPENSES_FILE.exists():
+        print("\t⚠️ ERROR! the expenses .csv file doesn't exist")
+        print(EXPENSES_FILE)
+        print("skipping...")
+        return
+
+    # Read existing content and clean it
+    content = EXPENSES_FILE.read_text().rstrip()
+    
+    # Write back with new expense, ensuring exactly one newline between entries
+    with open(EXPENSES_FILE, "w") as file:
+        file.write(content + "\n" + expense_line)
 
     return
