@@ -1,3 +1,4 @@
+import subprocess
 from datetime import datetime
 from pathlib import Path
 
@@ -14,10 +15,12 @@ def report():
 
     Sum of amount expensed per category for current month.
     """
-    print("reading expenses file...")
+    print()
+    print("\033[3mM O N T H L Y   R E P O R T\033[0m")
+    print()
+
     df = pd.read_csv(EXPENSES_FILE)
 
-    print("computing data...")
     # Group by category and sum the amounts
     category_sums = df.groupby("category")["amount"].sum().reset_index()
     # exclude "hacendado"
@@ -25,7 +28,6 @@ def report():
     # compute total amount
     total = category_sums["amount"].sum()
 
-    print("writing data to file...")
     # Create a temporary .dat file for termgraph
     temp_file = Path("temp_expenses.dat")
 
@@ -35,9 +37,7 @@ def report():
             f.write(f"{row['category']},{row['amount']}\n")
 
     try:
-        print("executing termgraph command...")
         # Execute termgraph command
-        import subprocess
 
         subprocess.run(["termgraph", "--width", "25", str(temp_file)], check=True)
 
