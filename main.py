@@ -1,4 +1,5 @@
 import os
+import readline
 import subprocess
 import time
 from pathlib import Path
@@ -44,6 +45,18 @@ def transcribe():
     return transcript
 
 
+def get_input_with_default(prompt: str, default: str) -> str:
+    def hook():
+        readline.insert_text(default)
+        readline.redisplay()
+
+    readline.set_pre_input_hook(hook)
+    try:
+        return input(prompt)
+    finally:
+        readline.set_pre_input_hook()
+
+
 def main():
     record()
     input("\t(👉👂 listening...)")
@@ -71,11 +84,24 @@ def main():
         print()
         return
     else:
-        print("ooops sorry, try saying it again:")
+        corrected_description = get_input_with_default(
+            "ooops sorry, try correcting the description:", expense.description
+        )
+        expense.description = corrected_description
         print()
-        main()
+        print(expense)
+        # main()
 
 
 if __name__ == "__main__":
     greetings()
     main()
+
+
+import readline
+
+if __name__ == "__main__":
+    prompt = "Enter your input: "
+    default_text = "Default text here"
+    user_input = get_input_with_default(prompt, default_text)
+    print(f"You entered: {user_input}")
