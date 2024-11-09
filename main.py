@@ -5,6 +5,7 @@ from pathlib import Path
 
 from openai import OpenAI
 
+from src.add_expense import add_expense
 from src.llm_call import extract_expense
 
 REPOSITORY_PATH = Path("/data/data/com.termux/files/home/diane")
@@ -46,7 +47,7 @@ def main():
     stop()
     print("\t(🤔 mhh...)")
     transcript = transcribe()
-    print(f"\t(🗣️ \"{transcript}\")")
+    print(f'\t(🗣️ "{transcript}")')
     print("\t(🛠️...)")
     expense = extract_expense(transcript)
     print()
@@ -59,10 +60,14 @@ def main():
     print("└───")
     print()
     confirmation = input("is that right? (Y/n)")
-    if confirmation.lower() == "n":
-        print("ooops sorry")
+    if confirmation.lower() != "n":
+        print()
+        print("\t(📝 saving...)")
+        add_expense(expense)
+        print("\t(✅ done)")
+        return
     else:
-        print("nice then")
+        print("ooops sorry")
 
 
 if __name__ == "__main__":
