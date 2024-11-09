@@ -6,12 +6,7 @@ from pathlib import Path
 from openai import OpenAI
 
 REPOSITORY_PATH = Path("/data/data/com.termux/files/home/diane")
-DATA_FOLDER_PATH = REPOSITORY_PATH / "data"
-
-FILENAME = DATA_FOLDER_PATH / f"audiorecording.m4a"
-
-with open(Path("/data/data/com.termux/files/home/.secrets/openai_api_key.txt"), "r") as file:
-    OPENAI_API_KEY = file.read().strip()
+FILENAME = REPOSITORY_PATH / "audiorecording.m4a"  # this is how Termux saves the audio file by default
 
 OPENAI_CLIENT = OpenAI()
 
@@ -22,7 +17,7 @@ def record():
 
 def stop():
     subprocess.run(["termux-microphone-record", "-q"], check=True, stdout=subprocess.DEVNULL)
-    # Give some time to the file to be created
+    # Give some time to the file to be created, otherwise there's a weird race condition
     time.sleep(1)
 
 
