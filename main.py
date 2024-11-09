@@ -58,38 +58,42 @@ def get_input_with_default(prompt: str, default: str) -> str:
 
 
 def main():
-    record()
-    input("\t(👉👂 listening...)")
-    stop()
-    print("\t(🤔 mhh...)")
-    transcript = transcribe()
-    print(f'\t(🗣️ "{transcript}")')
-    print("\t(🛠️...)")
-    expense = extract_expense(transcript)
-    print()
-    print("\033[3mwell, I think I understood the following:\033[0m")
-    print()
-    print("┌───")
-    print(f"│ description: {expense.description}")
-    print(f"│ amount:      {expense.amount}")
-    print(f"│ category:    {expense.category.value}")
-    print("└───")
-    print()
-    confirmation = input("is that right or correct description? (Y/n/c)")
-    if confirmation.lower() == "c":
-        print("sorry, retrying...")
+    expense_not_saved_yet = True
+
+    while expense_not_saved_yet:
+        record()
+        input("\t(👉👂 listening...)")
+        stop()
+        print("\t(🤔 mhh...)")
+        transcript = transcribe()
+        print(f'\t(🗣️ "{transcript}")')
+        print("\t(🛠️...)")
+        expense = extract_expense(transcript)
         print()
-        main()
-    elif confirmation.lower() == "n":
-        corrected_description = get_input_with_default(
-            "ooops sorry, try correcting the description:\n\n> ", expense.description
-        )
-        expense.description = corrected_description
-    print()
-    print("\t(📝 saving...)")
-    add_expense(expense)
-    print("\t(✅ done)")
-    print()
+        print("\033[3mwell, I think I understood the following:\033[0m")
+        print()
+        print("┌───")
+        print(f"│ description: {expense.description}")
+        print(f"│ amount:      {expense.amount}")
+        print(f"│ category:    {expense.category.value}")
+        print("└───")
+        print()
+        confirmation = input("is that right or correct description? (Y/n/r)")
+        if confirmation.lower() == "r":
+            print("sorry, retrying...")
+            print()
+            continue
+        elif confirmation.lower() == "n":
+            corrected_description = get_input_with_default(
+                "ooops sorry, try correcting the description:\n\n> ", expense.description
+            )
+            expense.description = corrected_description
+        print()
+        print("\t(📝 saving...)")
+        add_expense(expense)
+        print("\t(✅ done)")
+        print()
+        expense_not_saved_yet = False
     return
 
 
