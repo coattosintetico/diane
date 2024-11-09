@@ -41,7 +41,7 @@ def report():
     finally:
         print("cleaning up...")
         # Clean up the temporary file
-        # temp_file.unlink()
+        temp_file.unlink()
 
 
 if __name__ == "__main__":
