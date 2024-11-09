@@ -47,8 +47,8 @@ def report():
         print("┌───")
         print(f"│ Total for this month: {total:.2f} €")
         print("└───")
+        print()
     finally:
-        print("cleaning up...")
         # Clean up the temporary file
         temp_file.unlink()
 
