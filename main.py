@@ -84,7 +84,7 @@ def main():
             print("sorry, retrying...")
             print()
             continue
-        elif confirmation.lower() == "n":
+        elif confirmation.lower() == "d":
             corrected_description = get_input_with_default(
                 "ooops sorry, try correcting the description:\n\n> ", expense.description
             )
