@@ -63,8 +63,8 @@ def main():
     while expense_not_saved_yet:
         record()
         input("\t(👉👂 listening...)")
-        stop()
         print("\t(🤔 mhh...)")
+        stop()
         transcript = transcribe()
         print(f'\t(🗣️ "{transcript}")')
         print("\t(🛠️...)")

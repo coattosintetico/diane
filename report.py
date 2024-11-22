@@ -41,7 +41,7 @@ def report():
     try:
         # Execute termgraph command
 
-        subprocess.run(["termgraph", "--width", "25", str(temp_file)], check=True)
+        subprocess.run(["termgraph", "--width", "24", str(temp_file)], check=True)
 
         print()
         print("┌───")
