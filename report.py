@@ -21,7 +21,7 @@ def report():
     print("╚═════════════════════════════╝")
     print()
 
-    df = pd.read_csv(EXPENSES_FILE)
+    df = pd.read_csv(EXPENSES_FILE, on_bad_lines="error")
 
     # Group by category and sum the amounts
     category_sums = df.groupby("category")["amount"].sum().reset_index()
